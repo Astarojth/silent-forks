@@ -1,0 +1,1 @@
+跑几遍 `go test ./pkg/provisioner/ironic/ -count=1`，看看稳定不稳定，结果告诉我。

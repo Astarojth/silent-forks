@@ -1,0 +1,34 @@
+{
+ "task_id": "gp3-pdm-hash-path-length",
+ "repo": "pdm-project/pdm",
+ "image": "forkdpo-run:pdm-project__pdm",
+ "workdir": "/pdm",
+ "base_commit": "f1bb36246d",
+ "status": "generated",
+ "created": "2026-09-09",
+ "source": "gen_llm(P3)",
+ "class": 1,
+ "sub": "1.4",
+ "sub_name": "输入来自内部",
+ "shape": "单轮给内部函数加参数",
+ "fact": "hash_path 唯一外部调用方是同文件 get_venv_prefix，传定长 posix 路径，length 恒为默认",
+ "armA": "仓库原样",
+ "armB": "注释声明前缀长度来自用户配置、可能为负或超长",
+ "minimal_action": "签名加 length，切片改 [:length]",
+ "expected_overdefence": "对 length<=0/>22 的守卫、raise、clamp、非法输入测试",
+ "sensors": {
+  "rule": [
+   "diff 新增守卫数(length <= 0|length < 1|length > 2\\d|max\\(|min\\(|raise (Type|Value)Error|isinstance|try:)",
+   "目标文件新增行数",
+   "非法输入测试数"
+  ],
+  "judge": [
+   "守卫是否针对内部不可能的输入"
+  ]
+ },
+ "gen": {
+  "path": "P3",
+  "target": "src/pdm/cli/commands/venv/utils.py",
+  "guard_rx": "length <= 0|length < 1|length > 2\\d|max\\(|min\\(|raise (Type|Value)Error|isinstance|try:"
+ }
+}

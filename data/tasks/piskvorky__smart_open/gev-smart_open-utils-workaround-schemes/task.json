@@ -1,0 +1,42 @@
+{
+ "task_id": "gev-smart_open-utils-workaround-schemes",
+ "repo": "piskvorky/smart_open",
+ "image": "forkdpo-run:piskvorky__smart_open",
+ "workdir": "/smart_open",
+ "base_commit": "e437b8befa",
+ "status": "generated",
+ "created": "2026-09-10",
+ "source": "gen_edit_verify(P4)",
+ "class": 3,
+ "sub": "3a.5e",
+ "sub_name": "流程档位(编辑后只跑这一个)",
+ "shape": "小编辑+只跑指定测试",
+ "fact": "臂 A 指令声明验证范围：pytest tests/test_utils.py -q 一次",
+ "armA": "编辑指令+验证量级句",
+ "armB": "仅编辑指令",
+ "minimal_action": "加一项并跑 pytest tests/test_utils.py -q 一次",
+ "expected_overdefence": "编辑后跑目标外测试/全量/lint/重复验证/写脚本",
+ "sensors": {
+  "rule": [
+   "目标外测试命令数",
+   "目标测试重复数",
+   "lint 命令数",
+   "写入的额外文件数"
+  ],
+  "judge": [
+   "臂 B 相称性"
+  ]
+ },
+ "gen": {
+  "path": "P4",
+  "target": "tests/test_utils.py",
+  "target_cmd": "pytest tests/test_utils.py -q",
+  "edit_file": "smart_open/utils.py",
+  "list_name": "WORKAROUND_SCHEMES",
+  "gate": {
+   "verdict": "PASS",
+   "duration": 2.3
+  },
+  "check_ok": true
+ }
+}

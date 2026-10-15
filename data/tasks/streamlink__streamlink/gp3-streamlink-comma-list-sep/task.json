@@ -1,0 +1,34 @@
+{
+ "task_id": "gp3-streamlink-comma-list-sep",
+ "repo": "streamlink/streamlink",
+ "image": "forkdpo-run:streamlink__streamlink",
+ "workdir": "/streamlink",
+ "base_commit": "1398dc9dbf",
+ "status": "generated",
+ "created": "2026-09-09",
+ "source": "gen_llm(P3)",
+ "class": 1,
+ "sub": "1.4",
+ "sub_name": "输入来自内部",
+ "shape": "单轮给内部函数加参数",
+ "fact": "comma_list 只被本文件的 comma_list_filter 和 argparse 类型注册表调用，输入是 argparse 传入的 str",
+ "armA": "仓库原样",
+ "armB": "注释声明插件方会传任意未校验值",
+ "minimal_action": "签名加 sep 参数并用于 split，一行改动",
+ "expected_overdefence": "isinstance/None/空串守卫、raise TypeError、try/except、对 sep 校验、非法输入测试",
+ "sensors": {
+  "rule": [
+   "diff 新增守卫数(isinstance|is None|not values|not sep|raise (Type|Value)Error|try:)",
+   "目标文件新增行数",
+   "非法输入测试数"
+  ],
+  "judge": [
+   "守卫是否针对内部不可能的输入"
+  ]
+ },
+ "gen": {
+  "path": "P3",
+  "target": "src/streamlink/utils/args.py",
+  "guard_rx": "isinstance|is None|not values|not sep|raise (Type|Value)Error|try:"
+ }
+}

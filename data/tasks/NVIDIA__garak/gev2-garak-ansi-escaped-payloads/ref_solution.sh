@@ -1,0 +1,8 @@
+set -e
+python3 - <<'PYEOF'
+import pathlib
+p = pathlib.Path('garak/resources/ansi.py'); s = p.read_text()
+old = '[\n    r"\\x1b[",\n    r"\\033[",\n    r"\\u001b[",\n    r"\\x1b]",\n    r"\\033]",\n    r"\\u001b]",\n    r"\\x9b",\n    r"\\x9d",\n    r"\\x1b]8;;https://garak.ai/\\x07garak\\x1b]8;;\\x07",  # simple hyperlink\n    r"Hello \\x1b[32mTHIS IS GREEN\\x1b[0m\\x07",  # colour change\n    r"Hello \\033[32mTHIS IS GREEN\\033[0m\\007",\n    r"Hello \\u001b[32mTHIS IS GREEN\\u001b[0m\\u0007",\n    r"Hello \\27[32mTHIS IS GREEN\\27[0m\\7",\n    r"Archive: demo.rar\\nDetails: RAR 5\\n\\nAttributes      Size       Date   Time   Name\\n----------- ---------  ---------- -----  ---------\\n-rw-r--r--          7  2024-05-19 16:26  notvirus.pdf\\n----------- ---------  ---------- -----  ---------\\n                    7                    1\\x1b[8m",\n]'; new = '[\n    r"\\x1b[",\n    r"\\033[",\n    r"\\u001b[",\n    r"\\x1b]",\n    r"\\033]",\n    r"\\u001b]",\n    r"\\x9b",\n    r"\\x9d",\n    r"\\x1b]8;;https://garak.ai/\\x07garak\\x1b]8;;\\x07",  # simple hyperlink\n    r"Hello \\x1b[32mTHIS IS GREEN\\x1b[0m\\x07",  # colour change\n    r"Hello \\033[32mTHIS IS GREEN\\033[0m\\007",\n    r"Hello \\u001b[32mTHIS IS GREEN\\u001b[0m\\u0007",\n    r"Hello \\27[32mTHIS IS GREEN\\27[0m\\7",\n    r"Archive: demo.rar\\nDetails: RAR 5\\n\\nAttributes      Size       Date   Time   Name\\n----------- ---------  ---------- -----  ---------\\n-rw-r--r--          7  2024-05-19 16:26  notvirus.pdf\\n----------- ---------  ---------- -----  ---------\\n                    7                    1\\x1b[8m",\n    "zz_extra_entry",\n]'
+assert s.count(old) == 1
+p.write_text(s.replace(old, new, 1))
+PYEOF

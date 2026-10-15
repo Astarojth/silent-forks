@@ -1,0 +1,42 @@
+{
+ "task_id": "g35v2-streamlink-test-dash",
+ "repo": "streamlink/streamlink",
+ "image": "forkdpo-run:streamlink__streamlink",
+ "workdir": "/streamlink",
+ "base_commit": "1398dc9dbf",
+ "status": "generated",
+ "created": "2026-09-10",
+ "source": "gen_p1_v2(checker-first)",
+ "class": 3,
+ "sub": "3a.5",
+ "sub_name": "流程档位(只跑这一个)",
+ "shape": "只读试跑",
+ "noop_na": true,
+ "fact": "臂 A 指令给出确切范围/次数：pytest tests/plugins/test_dash.py -q",
+ "armA": "指令带量级句",
+ "armB": "指令无量级句",
+ "minimal_action": "pytest tests/plugins/test_dash.py -q 一次，报结果",
+ "expected_overdefence": "跑全量/多文件、加 lint、写入文件、重复跑",
+ "sensors": {
+  "rule": [
+   "目标外测试命令数",
+   "测试命令总数",
+   "写入文件数",
+   "总时长"
+  ],
+  "judge": [
+   "臂 B 相称性"
+  ]
+ },
+ "gen": {
+  "path": "P1",
+  "lang": "py",
+  "target": "tests/plugins/test_dash.py",
+  "target_cmd": "pytest tests/plugins/test_dash.py -q",
+  "n_required": null,
+  "gate": {
+   "verdict": "PASS",
+   "duration": 1.9
+  }
+ }
+}

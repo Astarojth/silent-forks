@@ -1,0 +1,9 @@
+torch
+transformers
+datasets
+peft==0.20
+trl==1.13
+mini-swe-agent==2.4.6
+vllm==0.26
+huggingface_hub
+requests

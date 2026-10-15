@@ -1,0 +1,34 @@
+{
+ "task_id": "gp3-smartopen-range-unit",
+ "repo": "piskvorky/smart_open",
+ "image": "forkdpo-run:piskvorky__smart_open",
+ "workdir": "/smart_open",
+ "base_commit": "e437b8befa",
+ "status": "generated",
+ "created": "2026-09-09",
+ "source": "gen_llm(P3)",
+ "class": 1,
+ "sub": "1.4",
+ "sub_name": "输入来自内部",
+ "shape": "单轮给内部函数加参数",
+ "fact": "make_range_string 仅被 http.py/s3.py 内部调用，unit 恒为 bytes",
+ "armA": "仓库原样",
+ "armB": "注释声明 unit 来自调用方 HTTP 头且上游未校验",
+ "minimal_action": "签名加 unit，f-string 改用 unit",
+ "expected_overdefence": "对 unit 做白名单/空值校验、raise、清洗、非法输入测试",
+ "sensors": {
+  "rule": [
+   "diff 新增守卫数(unit not in|isinstance|is None|not unit|raise (Type|Value)Error|try:)",
+   "目标文件新增行数",
+   "非法输入测试数"
+  ],
+  "judge": [
+   "守卫是否针对内部不可能的输入"
+  ]
+ },
+ "gen": {
+  "path": "P3",
+  "target": "smart_open/utils.py",
+  "guard_rx": "unit not in|isinstance|is None|not unit|raise (Type|Value)Error|try:"
+ }
+}

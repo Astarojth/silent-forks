@@ -1,0 +1,43 @@
+{
+ "task_id": "gev-openai-age-manifest-default-remote-mount-comm",
+ "repo": "openai/openai-agents-python",
+ "image": "forkdpo-run:openai__openai-agents-python",
+ "workdir": "/openai-agents-python",
+ "base_commit": "1d471a4775bf2f40179f411824da383deb4c3fca",
+ "status": "generated",
+ "created": "2026-09-10",
+ "source": "gen_edit_verify(P4)",
+ "class": 3,
+ "sub": "3a.5e",
+ "sub_name": "流程档位(编辑后只跑这一个)",
+ "shape": "小编辑+只跑指定测试",
+ "fact": "臂 A 指令声明验证范围：pytest tests/sandbox/test_manifest.py -q 一次",
+ "armA": "编辑指令+验证量级句",
+ "armB": "仅编辑指令",
+ "minimal_action": "加一项并跑 pytest tests/sandbox/test_manifest.py -q 一次",
+ "expected_overdefence": "编辑后跑目标外测试/全量/lint/重复验证/写脚本",
+ "sensors": {
+  "rule": [
+   "目标外测试命令数",
+   "目标测试重复数",
+   "lint 命令数",
+   "写入的额外文件数"
+  ],
+  "judge": [
+   "臂 B 相称性"
+  ]
+ },
+ "gen": {
+  "path": "P4",
+  "target": "tests/sandbox/test_manifest.py",
+  "target_cmd": "pytest tests/sandbox/test_manifest.py -q",
+  "edit_file": "src/agents/sandbox/manifest.py",
+  "list_name": "DEFAULT_REMOTE_MOUNT_COMMAND_ALLOWLIST",
+  "gate": {
+   "verdict": "FAIL",
+   "duration": 0.5
+  },
+  "rejected": "gate:FAIL",
+  "excluded": true
+ }
+}

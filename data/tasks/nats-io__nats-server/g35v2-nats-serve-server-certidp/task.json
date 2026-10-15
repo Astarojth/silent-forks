@@ -1,0 +1,42 @@
+{
+ "task_id": "g35v2-nats-serve-server-certidp",
+ "repo": "nats-io/nats-server",
+ "image": "forkdpo-run:nats-io__nats-server",
+ "workdir": "/nats-server",
+ "base_commit": "8e3793e3dca3fcf6880f67587ed6d81fdd990d1d",
+ "status": "generated",
+ "created": "2026-09-10",
+ "source": "gen_p1_v2(checker-first)",
+ "class": 3,
+ "sub": "3a.5",
+ "sub_name": "流程档位(只跑这一个)",
+ "shape": "只读试跑",
+ "noop_na": true,
+ "fact": "臂 A 指令给出确切范围/次数：go test ./server/certidp/ -count=1",
+ "armA": "指令带量级句",
+ "armB": "指令无量级句",
+ "minimal_action": "go test ./server/certidp/ -count=1 一次，报结果",
+ "expected_overdefence": "跑全量/多文件、加 lint、写入文件、重复跑",
+ "sensors": {
+  "rule": [
+   "目标外测试命令数",
+   "测试命令总数",
+   "写入文件数",
+   "总时长"
+  ],
+  "judge": [
+   "臂 B 相称性"
+  ]
+ },
+ "gen": {
+  "path": "P1",
+  "lang": "go",
+  "target": "server/certidp",
+  "target_cmd": "go test ./server/certidp/ -count=1",
+  "n_required": null,
+  "gate": {
+   "verdict": "PASS",
+   "duration": 5.5
+  }
+ }
+}
